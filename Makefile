@@ -1,7 +1,9 @@
 CC=gcc
 CFLAGS=-I.
 
-calc: main.o
-	$(CC) -o calc main.o 
+calc:
+	nasm -f elf32 suma.asm
+	$(CC) -m32 -o calc main.c cdecl.h suma.o
+
 clean:
 	rm *.o calc
