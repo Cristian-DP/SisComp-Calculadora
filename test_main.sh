@@ -12,7 +12,13 @@ assert_equals () {
 }
 
 response=$(./calc 6 + 2)
-assert_equals "$response" "OK suma, 6, 2"
+assert_equals "$response" "La suma es: 8"
+
+response=$(./calc -66 + 2)
+assert_equals "$response" "La suma es: -64"
 
 response=$(./calc 2 - 4)
-assert_equals "$response" "OK resta, 2, 4"
+assert_equals "$response" "La resta es: -2"
+
+response=$(./calc -2 - 4)
+assert_equals "$response" "La resta es: -6"
