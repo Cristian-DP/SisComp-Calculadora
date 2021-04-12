@@ -14,8 +14,8 @@ assert_equals () {
 response=$(./calc 4 - 2)
 assert_equals "$response" "La resta es: 2"
 response=$(./calc 4 - 84)
-assert_equals "$response" "La resta es: 2"
+assert_equals "$response" "La resta es: -80"
 response=$(./calc 4 - 4)
-assert_equals "$response" "La resta es: 2"
+assert_equals "$response" "La resta es: 0"
 response=$(./calc -4 - 2)
-assert_equals "$response" "La resta es: 2"
+assert_equals "$response" "La resta es: -6"
