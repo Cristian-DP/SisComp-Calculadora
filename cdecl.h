@@ -15,7 +15,6 @@
  * int PRE_CDECL f( int x, int y) POST_CDECL;
  */
 
-
 #if defined(__GNUC__)
 #  define PRE_CDECL
 #  define POST_CDECL __attribute__((cdecl))
