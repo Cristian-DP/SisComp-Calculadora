@@ -11,6 +11,7 @@ assert_equals () {
   fi
 }
 
+# test int 
 response=$(./calc 6 + 2)
 assert_equals "$response" "La suma es: 8"
 
@@ -22,3 +23,10 @@ assert_equals "$response" "La resta es: -2"
 
 response=$(./calc -2 - 4)
 assert_equals "$response" "La resta es: -6"
+
+# test binario 
+response=$(./calc -b 6 + 2)
+assert_equals "$response" "La suma binaria es: 6"
+
+response=$(./calc -b 2 - 66)
+assert_equals "$response" "La resta binaria es: 2"
