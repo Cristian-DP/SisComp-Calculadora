@@ -8,4 +8,4 @@ calc:
 	$(CC) -m32 -o calc main.c cdecl.h resta.o suma.o 
 
 clean:
-	rm *.o *.gch *.out calc
+	rm *.o calc
