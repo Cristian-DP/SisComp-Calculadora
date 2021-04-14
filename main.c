@@ -15,7 +15,6 @@ int operacion_int (char ** argv);
 
 int main (int argc, char * argv[]){
 
-    
     /* verificamos opcion binaria */
     if (strcmp (argv[1], "-b") == 0)
         operacion_binario (argv);
@@ -61,20 +60,18 @@ int operacion_binario (char ** argv)
     int int1 = binario_entero (bin1);
     int int2 = binario_entero (bin2);
 
-    char * binario = NULL;
     // identificamos los simbolos '+' y '-'
     if ((char)argv[3][0] == '+')
     {
-        binario = entero_binario( suma_asm(int1, int2));
-        printf ("La suma binaria es: %s", binario);
+        printf ("La suma binaria es: %s", 
+            entero_binario( suma_asm(int1, int2)));
 
     }else if ((char)argv[3][0] == '-')
     {
-        binario = entero_binario( resta_asm(int1, int2));
-        printf ("La resta binaria es: %s", binario);
+        printf ("La resta binaria es: %s", 
+            entero_binario( resta_asm(int1, int2)));
     }
     
-    free (binario);
     return 0;
 }
 
