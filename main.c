@@ -61,7 +61,7 @@ int operacion_binario (char ** argv)
     int int1 = binario_entero (bin1);
     int int2 = binario_entero (bin2);
 
-    char * binario;
+    char * binario = NULL;
     // identificamos los simbolos '+' y '-'
     if ((char)argv[3][0] == '+')
     {
