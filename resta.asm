@@ -17,6 +17,7 @@ segment .text
 resta_asm:
 
         enter   0, 0        ; create stack frame
+        pusha
 
         mov     eax, d1
         sub     eax, d2     ; subtract arg2 from eax

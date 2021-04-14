@@ -29,14 +29,3 @@ suma_asm:
 
     leave
     ret
-
-suma_binaria_asm:
-    enter 0,0 ; rutina de
-    pusha
-
-; code
-    mov eax, d1
-    xor eax, d2
-    
-    leave
-    ret
