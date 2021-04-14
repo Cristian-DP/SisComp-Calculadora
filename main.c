@@ -5,7 +5,7 @@
 #include "cdecl.h"
 
 int suma_asm( int , int ) __attribute__ ((cdecl));
-//int suma_binaria_asm( int , int ) __attribute__ ((cdecl));
+int suma_binaria_asm( int , int ) __attribute__ ((cdecl));
 int resta_asm( int , int ) __attribute__ ((cdecl));
 //int resta_binaria_asm( int , int ) __attribute__ ((cdecl));
 
@@ -41,8 +41,8 @@ int operacion_binario (char ** argv)
     // identificamos los simbolos '+' y '-'
     if ((char)argv[3][0] == '+')
     {
-       //printf("La suma binaria es: %d\n", suma_binaria_asm  (int1, int2));
-       printf("La suma binaria es: %d", int1);
+       printf("La suma binaria es: %d\n", suma_binaria_asm  (int1, int2));
+       //printf("La suma binaria es: %d", int1);
 
     }else if ((char)argv[3][0] == '-')
     {
@@ -54,12 +54,58 @@ int operacion_binario (char ** argv)
 }
 
 int main (int argc, char * argv[]){
+    int numero = 3;
+    int tam = 1;
+    int leng = 1;
+
+    int num;
+
+    if ( numero < 0)
+        num = (-1)*numero;
+    else
+        num = numero;
+
+    for (int i = 0; ; i++)
+    {
+        if ( num >= leng)
+        {
+            tam++;
+            leng *= 2;
+        }else{
+            break;
+        }
+        
+    }
+    
+
+    int binario[tam]; // | | |0|0|1| 
+
+    for (int i = tam-1; i >= 0 ; i--)
+    {
+        binario[i] = (num % 2);
+        num /= 2;
+        if (num == 1 || num == 0){
+            binario [i-1] = num;
+        }
+    }
+    
+    if(numero >= 0){
+        binario[0] = 0;
+    }else{
+        binario[0] = 1;
+    }
+    
+    char binario_char[tam];
+    for (size_t i = 0; i < tam; i++)
+    {
+        binario_char[0] = (char)binario[0];
+    }
     
     /* verificamos opcion binaria */
-     if (strcmp (argv[1], "-b") == 0)
-        operacion_binario (argv);
-    else 
-        operacion_int (argv);
+    // if (strcmp (argv[1], "-b") == 0)
+    //    operacion_binario (argv);
+    //else 
+    //    operacion_int (argv);
   
   
     return 0;

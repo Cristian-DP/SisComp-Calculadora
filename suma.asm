@@ -11,6 +11,7 @@ segment .bss
 
 segment .text
         global suma_asm
+        global suma_binaria_asm
 
         %define d1   [ebp+8]
         %define d2   [ebp+12]
@@ -26,5 +27,16 @@ suma_asm:
     mov     eax, d1
     add     eax, d2     ; add arg2 from eax
 
+    leave
+    ret
+
+suma_binaria_asm:
+    enter 0,0 ; rutina de
+    pusha
+
+; code
+    mov eax, d1
+    xor eax, d2
+    
     leave
     ret
