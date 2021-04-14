@@ -147,5 +147,6 @@ char * entero_binario(int numero){
         binario[0] = '0';
     }
 
+    binario[tam] = '\0';
     return strdup (binario);
 }
