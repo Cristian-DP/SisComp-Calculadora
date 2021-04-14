@@ -60,18 +60,20 @@ int operacion_binario (char ** argv)
     int int1 = binario_entero (bin1);
     int int2 = binario_entero (bin2);
 
+    char * binario = NULL;
     // identificamos los simbolos '+' y '-'
     if ((char)argv[3][0] == '+')
-    {
-        printf ("La suma binaria es: %s", 
-            entero_binario( suma_asm(int1, int2)));
+    {   
+        binario = entero_binario( suma_asm(int1, int2));
+        printf ("La suma binaria es: %s", binario);
 
     }else if ((char)argv[3][0] == '-')
-    {
-        printf ("La resta binaria es: %s", 
-            entero_binario( resta_asm(int1, int2)));
+    {   
+        binario = entero_binario( resta_asm(int1, int2));
+        printf ("La resta binaria es: %s", binario);
     }
     
+    free (binario);
     return 0;
 }
 
