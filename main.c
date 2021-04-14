@@ -1,14 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <getopt.h>
 #include <string.h>
 #include "cdecl.h"
 
-int suma_asm( int , int ) __attribute__ ((cdecl));
-int suma_binaria_asm( int , int ) __attribute__ ((cdecl));
-int resta_asm( int , int ) __attribute__ ((cdecl));
-//int resta_binaria_asm( int , int ) __attribute__ ((cdecl));
+int binario_entero (char * s);
+char * entero_binario(int numero);
 
+int suma_asm( int , int ) __attribute__ ((cdecl));
+int resta_asm( int , int ) __attribute__ ((cdecl));
+
+int operacion_binario (char ** argv);
+int operacion_int (char ** argv);
+
+
+int main (int argc, char * argv[]){
+
+    
+    /* verificamos opcion binaria */
+    if (strcmp (argv[1], "-b") == 0)
+        operacion_binario (argv);
+    else 
+        operacion_int (argv);
+  
+    return 0;
+}
+
+/**
+ * Resuelve para las entradas de forma decimal
+*/
 int operacion_int (char ** argv)
 {
     int int1, int2; 
@@ -20,7 +39,7 @@ int operacion_int (char ** argv)
     // identificamos los simbolos '+' y '-'
     if ((char)argv[2][0] == '+')
     {
-       printf("La suma es: %d\n", suma_asm  (int1, int2));
+        printf("La suma es: %d\n", suma_asm  (int1, int2));
 
     }else if ((char)argv[2][0] == '-')
     {
@@ -30,41 +49,78 @@ int operacion_int (char ** argv)
     return 0;
 }
 
+/*
+    Resuelve para las entradas de forma binaria
+*/
 int operacion_binario (char ** argv)
 {
-    int int1, int2; 
-
     // identificamos los argumentos
-    int1 = atoi (argv[2]);
-    int2 = atoi (argv[4]);
+    char* bin1 = argv[2];
+    char* bin2 = argv[4];
+   
+    int int1 = binario_entero (bin1);
+    int int2 = binario_entero (bin2);
 
+    char * binario;
     // identificamos los simbolos '+' y '-'
     if ((char)argv[3][0] == '+')
     {
-       printf("La suma binaria es: %d\n", suma_binaria_asm  (int1, int2));
-       //printf("La suma binaria es: %d", int1);
+        binario = entero_binario( suma_asm(int1, int2));
+        printf ("La suma binaria es: %s", binario);
 
     }else if ((char)argv[3][0] == '-')
     {
-        //printf("La resta binaria es: %d\n", resta_binaria_asm (int1, int2));
-        printf("La resta binaria es: %d", int1);
-
+        binario = entero_binario( resta_asm(int1, int2));
+        printf ("La resta binaria es: %s", binario);
     }
+    
+    free (binario);
     return 0;
 }
 
-int main (int argc, char * argv[]){
-    int numero = 3;
+/*
+    Se obtiene la representacion entera del binario
+*/
+int binario_entero (char * s){
+    
+    int size = strlen(s);
+    int entero = 0;
+
+    for (int i = 0; i < size; i++){
+        int potencia = 1;
+
+        if (s[i] == '1')
+        {
+            for(int j = 0; j < (size-i-1); j++)
+                potencia *= 2;
+
+            entero += potencia;   
+        }
+    }
+    return entero;
+}
+
+/*
+    Se pasa un numero entero a su version en binario
+*/
+char * entero_binario(int numero){
+    
     int tam = 1;
     int leng = 1;
-
     int num;
-
-    if ( numero < 0)
+    int flag_signed = 0;
+    
+    /* verifico si es positivo */
+    if ( numero < 0){
         num = (-1)*numero;
-    else
+        flag_signed = 1;
+    }
+    else{
         num = numero;
+        flag_signed = 0;
+    }
 
+    /* obtengo el tamaño del binario resultante */
     for (int i = 0; ; i++)
     {
         if ( num >= leng)
@@ -74,39 +130,25 @@ int main (int argc, char * argv[]){
         }else{
             break;
         }
-        
     }
-    
 
-    int binario[tam]; // | | |0|0|1| 
+    char binario[tam];
+    lldiv_t resultadoDeLaDivision;
 
+    /* obtengo la representacion binaria */
     for (int i = tam-1; i >= 0 ; i--)
     {
-        binario[i] = (num % 2);
-        num /= 2;
-        if (num == 1 || num == 0){
-            binario [i-1] = num;
-        }
+        resultadoDeLaDivision = lldiv(num, 2);
+        binario[i] = resultadoDeLaDivision.rem == 1 ? '1' : '0';
+	    num = resultadoDeLaDivision.quot;
     }
     
-    if(numero >= 0){
-        binario[0] = 0;
+    /* Representamos el signo del binario*/
+    if(flag_signed){
+        binario[0] = '1';
     }else{
-        binario[0] = 1;
+        binario[0] = '0';
     }
-    
-    char binario_char[tam];
-    for (size_t i = 0; i < tam; i++)
-    {
-        binario_char[0] = (char)binario[0];
-    }
-    
-    /* verificamos opcion binaria */
-    // if (strcmp (argv[1], "-b") == 0)
-    //    operacion_binario (argv);
-    //else 
-    //    operacion_int (argv);
-  
-  
-    return 0;
+
+    return strdup (binario);
 }

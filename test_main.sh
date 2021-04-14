@@ -25,8 +25,11 @@ response=$(./calc -2 - 4)
 assert_equals "$response" "La resta es: -6"
 
 # test binario 
-response=$(./calc -b 6 + 2)
-assert_equals "$response" "La suma binaria es: 6"
+response=$(./calc -b 110 + 010)
+assert_equals "$response" "La suma binaria es: 01000"
 
-response=$(./calc -b 2 - 66)
-assert_equals "$response" "La resta binaria es: 2"
+response=$(./calc -b 1000000 - 1010)
+assert_equals "$response" "La resta binaria es: 0110110"
+
+response=$(./calc -b 1000000 + 1010)
+assert_equals "$response" "La suma binaria es: 01001010"
