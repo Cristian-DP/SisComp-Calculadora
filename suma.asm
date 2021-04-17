@@ -8,6 +8,7 @@ segment .bss
 ;
 ; Datos no iniciados se colocan en el segmento bss
 ;
+suma resd 1     ; suma total
 
 segment .text
         global suma_asm
@@ -26,6 +27,9 @@ suma_asm:
 ;
     mov     eax, d1
     add     eax, d2     ; add arg2 from eax
+    mov     [suma], eax
 
+    popa
+    mov     eax, [suma]
     leave
     ret
