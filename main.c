@@ -65,12 +65,12 @@ int operacion_binario (char ** argv)
     if ((char)argv[3][0] == '+')
     {   
         binario = entero_binario( suma_asm(int1, int2));
-        printf ("La suma binaria es: %s", binario);
+        printf ("La suma binaria es: %s\n", binario);
 
     }else if ((char)argv[3][0] == '-')
     {   
         binario = entero_binario( resta_asm(int1, int2));
-        printf ("La resta binaria es: %s", binario);
+        printf ("La resta binaria es: %s\n", binario);
     }
     
     free (binario);
