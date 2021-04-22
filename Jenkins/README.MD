@@ -1,5 +1,5 @@
-# Imagenes de los test en jenkin
+# Imágenes de los test en jenkins
 
-## Pasos de Jenkins
+## Pasos de ejecución
 - make
 - sh test_main.sh
