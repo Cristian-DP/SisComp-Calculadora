@@ -2,4 +2,4 @@
 
 ## Pasos de Jenkins
 - make
-- sh calc.sh
+- sh test_main.sh
