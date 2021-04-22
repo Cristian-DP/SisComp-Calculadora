@@ -6,7 +6,8 @@
 
 ## Casos de prueba
 
-**prueba con número enteros** 
+- **prueba con número enteros** 
+
 response=$(./calc 6 + 2)
 assert_equals "$response" "La suma es: 8"
 
@@ -19,7 +20,8 @@ assert_equals "$response" "La resta es: -2"
 response=$(./calc -2 - 4)
 assert_equals "$response" "La resta es: -6"
 
-**prueba con números binarios** 
+- **prueba con números binarios** 
+
 response=$(./calc -b 110 + 010)
 assert_equals "$response" "La suma binaria es: 01000"
 
